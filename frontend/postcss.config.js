@@ -1,6 +1,10 @@
 module.exports = {
-  plugins: [
-    require('postcss-easy-import')({prefix: '_'}), // keep this first
-    require('autoprefixer')({ /* ...options */ }) // so imports are auto-prefixed too
-  ]
+  syntax: 'postcss-scss', // Technically for postcss to sass
+  map: false,
+  from: '/src/styles/style.scss',
+  to: '/src/styles/style.css',
+  plugins: {
+    'postcss-easy-import': {prefix: '_'},
+    'autoprefixer': {}
+  }
 }
