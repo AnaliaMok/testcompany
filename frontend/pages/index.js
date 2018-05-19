@@ -14,7 +14,7 @@ const headerImageStyle = {
 class Index extends Component {
     static async getInitialProps(context) {
         const pageRes = await fetch(
-            `${Config.apiUrl}/wp-json/postlight/v1/page?slug=welcome`
+            `${Config.apiUrl}/wp-json/wp/v2/pages?slug=welcome`
         );
         const page = await pageRes.json();
         const postsRes = await fetch(
@@ -65,11 +65,11 @@ class Index extends Component {
                     width="815"
                     style={headerImageStyle}
                 />
-                <h1>{this.props.page.title.rendered}</h1>
+                {/* <h1>{this.props.page.title.rendered}</h1> */}
                 <div
-                    dangerouslySetInnerHTML={{
-                        __html: this.props.page.content.rendered
-                    }}
+                    // dangerouslySetInnerHTML={{
+                    //     __html: this.props.page.content.rendered
+                    // }}
                 />
                 <h2>Posts</h2>
                 {posts}
