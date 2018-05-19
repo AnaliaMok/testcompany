@@ -17,7 +17,8 @@ class RoboFile extends \Robo\Tasks {
      * @param  array $opts Options
      * @return void
      */
-    public function wordpressSetup(
+    public function wordpressSetup() {
+        // TODO: Convert robo file to plain php script
         $opts = [
             'wp-user' => 'nedstark',
             'wp-pw' => 'winteriscoming',
@@ -27,78 +28,13 @@ class RoboFile extends \Robo\Tasks {
             'wp-db-name' => 'wp_headless',
             'wp-description' => 'Just another (headless) WordPress site',
             'wp-plugins' => [],
-        ]
-    ) {
-        $confirm = $this->io()->confirm( 'This will replace your current ' .
-        'WordPress install. Are you sure you want to do this?', false );
-
-        if ( ! $confirm ) {
-            return;
-        }
-
-        $uname = php_uname();
-        $is_darwin = ( strpos( $uname, 'Darwin' ) === 0 );
-        $config_db_answer = $this->ask(
-            "Do you have an existing database you'd like to use and configure yourself? (y/n): "
-        );
-        $db_ip = '';
-        $db_pass = '';
-        if ( 'y' === $config_db_answer ) {
-            $db_ip = $this->ask( 'Database IP address (press Enter for default value [0.0.0.0]): ' );
-            $db_pass = $this->ask( 'Database root password (press Enter for default value [root]): ' );
-            if ( $is_darwin ) {
-                $this->_exec( 'mysql.server start' );
-            } else {
-                $this->_exec( 'sudo service mysql start' );
-            }
-        } else {
-            if ( $is_darwin ) {
-                $this->_exec( 'brew install mysql' );
-                $this->_exec( 'mysql.server start' );
-                $this->_exec( './mysql_config.sh' );
-            } else {
-                $this->_exec(
-                    "echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections"
-                );
-                $this->_exec(
-                    "echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections"
-                );
-                $this->_exec( 'sudo apt-get -y install mysql-server' );
-                $this->_exec( 'sudo usermod -d /var/lib/mysql/ mysql' );
-                $this->_exec( 'sudo service mysql start' );
-            }
-        }
-
-        if ( !$db_pass || strlen( $db_pass ) === 0 ) {
-            $db_pass = 'root';
-        }
-
-        if ( !$db_ip || strlen( $db_ip ) === 0 ) {
-            $db_ip = '0.0.0.0';
-        }
-
-        $this->_exec(
-            'mysql -uroot -p' . $db_pass . ' -h ' . $db_ip . " -e 'create user if not exists "
-            . $opts['wp-db-name'] . "'"
-        );
-        $this->_exec(
-            'mysql -uroot -p' . $db_pass . ' -h ' . $db_ip
-            . " -e 'create database if not exists " . $opts['wp-db-name'] . "'"
-        );
-        $this->_exec(
-            'mysql -uroot -p' . $db_pass . ' -h ' . $db_ip . ' -e "grant all privileges on ' . $opts['wp-db-name']
-            . '.* to ' . $opts['wp-db-name'] . "@localhost identified by '" . $opts['wp-db-name'] . "'\""
-        );
-
-        $this->_exec( 'mysql -uroot -p' . $db_pass . ' -h ' . $db_ip . " -e 'flush privileges'" );
+        ];
 
         $this->wp( 'core download --version=4.9.5 --locale=en_US --force' );
         $this->wp(
             'core config --dbname=' . $opts['wp-db-name'] . ' --dbuser=' . $opts['wp-db-name'] . ' --dbpass='
             . $opts['wp-db-name'] . ' --dbhost=' . $db_ip
         );
-        $this->wp( 'db drop --yes' );
-        $this->wp( 'db create' );
 
         $install_command = implode( ' ', [
             'core install',
@@ -113,7 +49,6 @@ class RoboFile extends \Robo\Tasks {
         $this->wp( $install_command );
 
         $this->wp( 'theme activate ' . $opts['wp-theme-dir'] );
-        $this->wp( 'theme delete twentyfourteen' );
         $this->wp( 'theme delete twentyfifteen' );
         $this->wp( 'theme delete twentysixteen' );
         $this->wp( 'theme delete twentyseventeen' );
@@ -134,6 +69,7 @@ class RoboFile extends \Robo\Tasks {
             );
         }
 
+        // Plugin Activation
         if ( count( $installed_plugin_directories ) > 0 ) {
             $plugins_command = 'plugin activate ' . ( implode( ' ', $installed_plugin_directories ) );
             $this->wp( $plugins_command );
@@ -150,30 +86,22 @@ class RoboFile extends \Robo\Tasks {
 
         // Update the Hello World post
         $this->wp(
-            'post update 1 wp-content/themes/postlight-headless-wp/post-content/sample-post.txt '.
+            'post update 1 wp-content/themes/'. $opts['wp-theme-dir'] . '/post-content/sample-post.txt '.
             '--post_title="Sample Post" --post_name=sample-post'
         );
 
         // Create homepage content
         $this->wp(
-            'post create wp-content/themes/postlight-headless-wp/post-content/welcome.txt '.
+            'post create wp-content/themes/'. $opts['wp-theme-dir'] . '/post-content/welcome.txt '.
             '--post_type=page --post_status=publish --post_name=welcome '.
             '--post_title="Congratulations!"'
         );
-
-        // Update the default 'Uncategorized' category name to make it more menu-friendly
-        $this->wp( 'term update category 1 --name="Sample Category"' );
 
         // Set up example menu
         $this->wp( 'menu create "Header Menu"' );
         $this->wp( 'menu item add-post header-menu 1' );
         $this->wp( 'menu item add-post header-menu 2' );
         $this->wp( 'menu item add-term header-menu category 1' );
-        $this->wp(
-            'menu item add-custom header-menu '
-            .'"Read about the Starter Kit on Medium" https://trackchanges.postlight.com/'
-            .'introducing-postlights-wordpress-react-starter-kit-a61e2633c48c'
-        );
         $this->wp( 'menu location assign header-menu header-menu' );
 
         $this->io()->success(
