@@ -24,12 +24,12 @@ To start wordpress backend (after installation), run the following commands:
 > cd wordpress && yarn install && yarn start
 ```
 
-or 
+or use the the WP-CLI
 
 ```zsh
 > cd wordpress && wp start
 ```
-### Plugins
+### Included Plugins
 * [ACF to WP API](https://wordpress.org/plugins/acf-to-wp-api/)
 * [WP-REST-API V2 Menus](https://wordpress.org/plugins/wp-rest-api-v2-menus/)
 * [ACF](https://wordpress.org/plugins/advanced-custom-fields/) Standard edition
