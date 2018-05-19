@@ -16,6 +16,7 @@ When the installation process completes successfully:
 *   The WordPress admin is at [http://localhost:8080/wp-admin/](http://localhost:8080/wp-admin/)
 
 ## Tailored Wordpress Installation
+_Starting with the original Postlight Wordpress and React Starter kit_
 1. Create a local mysql db with collation `utf8_general_ci`
 2. At the root of the directory, run `wp core download --version=4.9.5 --locale=en_US --force`
 3. Either using the wp-cli or by direct file editing of `wp-config`, apply database settings (i.e. dbname, dbusername, dbpassword, etc)
