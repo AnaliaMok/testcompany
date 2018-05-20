@@ -1,16 +1,17 @@
 import Link from "next/link";
 
-const hrStyle = {
-    marginTop: 75
-};
-
+// TODO: Properly Retrieve links
 const Footer = () => (
     <footer>
-        <p>
-            {/* <Link href="https://github.com/postlight/headless-wp-starter">
-                <a>Fork on GitHub</a>
-            </Link> */}
-        </p>
+        <div className="footer__links">
+            <Link href="/page/terms-of-use">
+                <a>Terms of Use</a>
+            </Link>|
+            <Link href="/page/privacy-policy">
+                <a>Privacy Policy</a>
+            </Link>
+        </div>
+        <span>&copy;2018 All Rights Reserved, Test Company</span>
     </footer>
 );
 
