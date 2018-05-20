@@ -10,5 +10,7 @@ export const navStyles = css`
   .nav__item{
     display: inline-block;
     padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: #0A1612;
   }
 `;
