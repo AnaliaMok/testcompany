@@ -26,3 +26,6 @@ require_once 'inc/api-routes.php';
 
 // Add custom post types
 require_once 'inc/custom_post_types.php';
+
+// Add ACF fields
+//require_once 'acf-json/acf_fields.php';

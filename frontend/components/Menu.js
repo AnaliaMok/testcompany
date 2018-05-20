@@ -21,6 +21,12 @@ class Menu extends Component {
             <a>{item.title}</a>
           </Link>
         );
+      }else if(item.title === "Home"){
+        return (
+          <Link href="/">
+            <a className="nav__item">Home</a>
+          </Link>
+        );
       }
       const slug = this.getSlug(item.url);
       const actualPage = item.object === "category" ? "category" : "post";
@@ -38,9 +44,6 @@ class Menu extends Component {
     return(
       <React.Fragment>
         <nav className="nav">
-          <Link href="/">
-            <a className="nav__item">Home</a>
-          </Link>
           {menuItems}
         </nav>
         <style jsx global>{navStyles}</style>
