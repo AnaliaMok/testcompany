@@ -6,6 +6,7 @@ import PageWrapper from "../components/PageWrapper.js";
 import Menu from "../components/Menu.js";
 import HeroHeader from "../components/partials/HeroHeader.js";
 import Services from "../components/partials/Services.js";
+import Testimonials from "../components/partials/Testimonials.js";
 import { Config } from "../config.js";
 
 class Index extends Component {
@@ -26,6 +27,7 @@ class Index extends Component {
         <HeroHeader settings={this.props.page[0].acf}/>
         <main>
             <Services />
+            <Testimonials />
         </main>
       </Layout>
     );
