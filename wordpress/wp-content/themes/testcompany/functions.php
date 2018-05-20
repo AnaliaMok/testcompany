@@ -29,3 +29,9 @@ require_once 'inc/custom_post_types.php';
 
 // Add ACF fields
 //require_once 'acf-json/acf_fields.php';
+
+// Custom ACF Filters
+// function acf_load_header_text($field){
+//   return $field;
+// }
+// add_filter('acf/load_field/name=page_header_text', 'acf_load_header_text');

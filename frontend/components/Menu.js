@@ -23,7 +23,7 @@ class Menu extends Component {
         );
       }else if(item.title === "Home"){
         return (
-          <Link href="/">
+          <Link href="/" key={item.ID}>
             <a className="nav__item">Home</a>
           </Link>
         );
@@ -44,7 +44,14 @@ class Menu extends Component {
     return(
       <React.Fragment>
         <nav className="nav">
-          {menuItems}
+          <Link href="/">
+            <a className="nav__logo">
+              <img src="/static/images/logo.svg" alt="TechCompany" className="nav__logo"/>
+            </a>
+          </Link>
+          <div className="nav__items">
+            {menuItems}
+          </div>
         </nav>
         <style jsx global>{navStyles}</style>
       </React.Fragment>
