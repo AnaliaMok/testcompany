@@ -35,3 +35,6 @@ require_once 'inc/custom_post_types.php';
 //   return $field;
 // }
 // add_filter('acf/load_field/name=page_header_text', 'acf_load_header_text');
+
+// Custom Thumbnail Sizes
+add_image_size('project_thumbnail', 300, 300, true);

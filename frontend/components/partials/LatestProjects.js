@@ -13,7 +13,7 @@ export default class LatestProjects extends Component {
   }
 
   componentDidMount() {
-    fetch(`${Config.apiUrl}/wp-json/wp/v2/projects?status=publish&per_page=3`)
+    fetch(`${Config.apiUrl}/wp-json/wp/v2/projects?status=publish&per_page=4`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -36,12 +36,13 @@ export default class LatestProjects extends Component {
       return;
     }
    
+    // TODO: Wrap project in link to single-projects page
     const formattedProjects = projects.map((project, index) => {
       return (
         <div key={index} className="latest-projects__projects__project">
           <div className="latest-projects__projects__project__image">
             {project.acf.project_featured_image != undefined ? 
-              <img src={project.acf.project_featured_image.sizes.medium} alt={project.acf.project_featured_image.alt} /> :
+              <img src={project.acf.project_featured_image.sizes.project_thumbnail} alt={project.acf.project_featured_image.alt} /> :
                <img src="http://via.placeholder.com/300x300" alt={project.acf.project_title}/>} 
           </div>
         </div>
