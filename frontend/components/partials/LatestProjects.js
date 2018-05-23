@@ -47,15 +47,18 @@ export default class LatestProjects extends Component {
       const projectLink = this.getSlug(project.link);
       return (
         <div key={index} className="latest-projects__projects__project">
+          <div className="latest-projects__projects__project__image">
+            {project.acf.project_featured_image != undefined ? 
+              <img src={project.acf.project_featured_image.sizes.project_thumbnail} alt={project.acf.project_featured_image.alt} /> :
+              <img src="http://via.placeholder.com/300x300" alt={project.acf.project_title}/>} 
+          </div>
           <Link
-            
+            as={`/projects/${projectLink}`}
             href={`/project?slug=${projectLink}&apiRoute=projects`}
             key={project.ID}
           >
-            <a className="latest-projects__projects__project__image">
-              {project.acf.project_featured_image != undefined ? 
-                <img src={project.acf.project_featured_image.sizes.project_thumbnail} alt={project.acf.project_featured_image.alt} /> :
-                <img src="http://via.placeholder.com/300x300" alt={project.acf.project_title}/>} 
+            <a className="latest-projects__projects__project__overlay">
+              <h2>{project.acf.project_title}</h2>
             </a>
           </Link>
         </div>
