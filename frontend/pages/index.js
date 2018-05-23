@@ -8,6 +8,7 @@ import HeroHeader from "../components/partials/HeroHeader.js";
 import Services from "../components/partials/Services.js";
 import Testimonials from "../components/partials/Testimonials.js";
 import LatestProjects from "../components/partials/LatestProjects.js";
+import Partners from "../components/partials/Partners.js";
 import { Config } from "../config.js";
 
 class Index extends Component {
@@ -30,6 +31,7 @@ class Index extends Component {
             <Services />
             <Testimonials />
             <LatestProjects />
+            <Partners />
         </main>
       </Layout>
     );
