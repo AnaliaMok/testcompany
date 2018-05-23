@@ -13,6 +13,8 @@ export const heroHeaderStyles = css`
   }
   .hero-header__overlay{
     position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
   }

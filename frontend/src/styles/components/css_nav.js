@@ -9,6 +9,7 @@ export const navStyles = css`
     justify-content: flex-end;
     align-items: center;
     padding: 0 3.8rem;
+    max-width: 100vw;
   }
   .nav__logo{
     max-height: 2rem;
