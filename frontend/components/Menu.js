@@ -13,6 +13,11 @@ class Menu extends Component {
     return parts.length > 2 ? parts[parts.length - 2] : "";
   }
 
+  // Helper Method to direct to correct slug
+  resolveItemObject(item){
+    return "";
+  }
+
   render() {
     const menuItems = this.props.menu.items.map((item, index) => {
       if (item.object === "custom") {
@@ -29,7 +34,8 @@ class Menu extends Component {
         );
       }
       const slug = this.getSlug(item.url);
-      const actualPage = item.object === "category" ? "category" : "post";
+      const actualPage = item.object === "page" ? "post" : item.object;
+      
       return (
         <Link
           as={`/${item.object}/${slug}`}

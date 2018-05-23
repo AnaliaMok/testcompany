@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from "next/link";
 import { Config } from "../../config.js";
 import styles, {latestProjectsStyles} from "../../src/styles/components/css_latestprojects";
 
@@ -30,7 +31,12 @@ export default class LatestProjects extends Component {
         }
       );
   }
-
+  
+  getSlug(url) {
+    const parts = url.split("/");
+    return parts.length > 2 ? parts[parts.length - 2] : "";
+  }
+  
   renderProjects(projects) {
     if(projects === undefined || (projects !== undefined && projects.length === 0)){
       return;
@@ -38,19 +44,28 @@ export default class LatestProjects extends Component {
    
     // TODO: Wrap project in link to single-projects page
     const formattedProjects = projects.map((project, index) => {
+      const projectLink = this.getSlug(project.link);
       return (
         <div key={index} className="latest-projects__projects__project">
-          <div className="latest-projects__projects__project__image">
-            {project.acf.project_featured_image != undefined ? 
-              <img src={project.acf.project_featured_image.sizes.project_thumbnail} alt={project.acf.project_featured_image.alt} /> :
-               <img src="http://via.placeholder.com/300x300" alt={project.acf.project_title}/>} 
-          </div>
+          <Link
+            
+            href={`/project?slug=${projectLink}&apiRoute=projects`}
+            key={project.ID}
+          >
+            <a className="latest-projects__projects__project__image">
+              {project.acf.project_featured_image != undefined ? 
+                <img src={project.acf.project_featured_image.sizes.project_thumbnail} alt={project.acf.project_featured_image.alt} /> :
+                <img src="http://via.placeholder.com/300x300" alt={project.acf.project_title}/>} 
+            </a>
+          </Link>
         </div>
       );
     });
 
     return formattedProjects;
   }
+
+
   render() {
     const { errors, isLoaded, latestProjects } = this.state;
     

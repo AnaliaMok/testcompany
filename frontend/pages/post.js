@@ -13,11 +13,12 @@ class Post extends Component {
             `${Config.apiUrl}/wp-json/postlight/v1/${apiRoute}?slug=${slug}`
         );
         const post = await res.json();
-        return { post };
+        return { post, slug };
     }
 
     render() {
-        if (!this.props.post.title) return <Error statusCode={404} />;
+        if (!this.props.post.title) return (<h2>{this.props.slug}</h2>);
+        //if (!this.props.post.title) return <Error statusCode={404} />;
 
         return (
             <Layout>
