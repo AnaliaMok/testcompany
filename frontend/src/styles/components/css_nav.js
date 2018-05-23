@@ -6,7 +6,6 @@ import css from 'styled-jsx/css'
 export const navStyles = css`
   .nav{
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     padding: 0 3.8rem;
     max-width: 100vw;
