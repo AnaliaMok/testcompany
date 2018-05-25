@@ -3,3 +3,4 @@ npm-debug.log
 yarn-error.log
 wordpress/wp-content/languages/
 wordpress/wp-config.php
+wordpress/wp-content/plugins/fakerpress/

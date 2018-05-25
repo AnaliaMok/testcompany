@@ -38,3 +38,4 @@ require_once 'inc/custom_post_types.php';
 
 // Custom Thumbnail Sizes
 add_image_size('project_thumbnail', 300, 300, true);
+add_theme_support( 'post-thumbnails' );
