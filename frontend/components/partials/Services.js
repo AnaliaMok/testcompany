@@ -69,6 +69,7 @@ export default class Services extends Component {
             </ul>
           </div>
         </div>
+        {/* Absolutely hate this but have no choice */}
         <style jsx global>{servicesStyles}</style>
       </React.Fragment>
     )

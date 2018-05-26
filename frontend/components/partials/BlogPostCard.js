@@ -64,6 +64,7 @@ class BlogPostCard extends Component {
           </Link>
           </div>
         </div>
+        {/* Absolutely hate this but have no choice */}
         <style>{blogPostStyle}</style>
       </React.Fragment>
     )

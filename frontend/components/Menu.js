@@ -59,6 +59,7 @@ class Menu extends Component {
             {menuItems}
           </div>
         </nav>
+        {/* Absolutely hate this but have no choice */}
         <style jsx global>{navStyles}</style>
       </React.Fragment>
     )

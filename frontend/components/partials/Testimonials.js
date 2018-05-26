@@ -65,6 +65,7 @@ export default class Testimonials extends Component {
           {this.renderTestimonials(testimonials)}
         </div>
       </div>
+      {/* Absolutely hate this but have no choice */}
       <style jsx global>{testimonialsStyles}</style>
       </React.Fragment>
     )

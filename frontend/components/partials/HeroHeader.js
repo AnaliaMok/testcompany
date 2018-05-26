@@ -19,6 +19,7 @@ const HeroHeader = ({settings}) => (
         <p className="hero-header__content__text">{settings.hero_main_text}</p>
       </div>
     </header>
+    {/* Absolutely hate this but have no choice */}
     <style jsx global>{heroHeaderStyles}</style>
   </React.Fragment>
 );

@@ -82,6 +82,7 @@ export default class LatestProjects extends Component {
             {this.renderProjects(latestProjects)}
           </div>
         </div>
+        {/* Absolutely hate this but have no choice */}
         <style jsx global>{latestProjectsStyles}</style>
       </React.Fragment>
     )

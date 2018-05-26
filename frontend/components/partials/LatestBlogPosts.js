@@ -66,6 +66,7 @@ class LatestBlogPosts extends Component {
             {this.renderBlogPosts(latestPosts)}
           </div>
         </div>
+        {/* Absolutely hate this but have no choice */}
         <style jsx global>{latestBlogPostStyles}</style>
       </React.Fragment>
     )

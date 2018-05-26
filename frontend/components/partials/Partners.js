@@ -60,6 +60,7 @@ export default class Partners extends Component {
             {this.renderPartners(partners)}
           </div>
         </div>
+        {/* Absolutely hate this but have no choice */}
         <style jsx global>{partnersStyles}</style>
       </React.Fragment>
     )
