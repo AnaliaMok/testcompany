@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Link from "next/link";
 import { Config } from "../../config.js";
 import * as Helper from "../../Helper.js";
+import BlogPostCard from "./BlogPostCard";
+import styles, {latestBlogPostStyles} from "../../src/styles/components/css_latestblogposts";
 
 class LatestBlogPosts extends Component {
 
@@ -33,34 +35,19 @@ class LatestBlogPosts extends Component {
       );
   }
 
+  getSlug(url) {
+    const parts = url.split("/");
+    return parts.length > 2 ? parts[parts.length - 2] : "";
+  }
+
   renderBlogPosts(posts) {
     if(posts === undefined || (posts !== undefined && posts.length === 0)){
       return;
     }
     
     const formattedPosts = posts.map((post, index) => {
-      let postLink = Helper.getSlug(post.link);
-      var media;
-
-      const outputMedia = (data) => {
-        media = data;
-        return data;
-      };
-
-      Helper.getMediaItem(outputMedia, post.featured_media);
-      //console.log(getMediaItem(featuredImage, post.featured_media));
-      //console.log(featuredImage);
-
       return (
-        <div key={index} className="latest-blog-posts__post">
-          <div className="latest-blog-posts__post__img-container">
-            {/* <img src={media.source_url} alt={media.alt === "" ? post.title.rendered : media.alt}/> */}
-          </div>
-          <div className="latest-blog-posts__post__conte">
-            <h2>{post.title.rendered}</h2>
-            <p dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></p>
-          </div>
-        </div>
+        <BlogPostCard key={post.title.rendered} post={post}/>
       );
     });
 
@@ -79,6 +66,7 @@ class LatestBlogPosts extends Component {
             {this.renderBlogPosts(latestPosts)}
           </div>
         </div>
+        <style jsx global>{latestBlogPostStyles}</style>
       </React.Fragment>
     )
   }

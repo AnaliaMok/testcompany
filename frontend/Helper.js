@@ -6,21 +6,20 @@ import { Config } from "./config.js";
 /**
  * Retrieves a media object
  * 
- * @param func callback 
  * @param int mediaId Media library id
  * @param string size if all, returns sizes object, otherwise returns specified size object
  * @return Object media object
  */
-export function getMediaItem(callback, mediaId = 0, size = 'full'){
+export function getMediaItem(mediaId = 0, size = 'full'){
   if(mediaId === 0)
     return null;
   
-  let otherMediaObj;
+  let mediaObject = {};
   fetch(`${Config.apiUrl}/wp-json/wp/v2/media?${mediaId}`)
     .then(res => res.json())
     .then(
       (data) => {
-        let mediaObject;
+
         switch(size){
           case 'thumbnail':
             mediaObject = data[0].media_details.sizes.thumbnail;
@@ -41,7 +40,6 @@ export function getMediaItem(callback, mediaId = 0, size = 'full'){
 
         // Set Alt Text
         mediaObject.alt = data[0].alt_text;
-        callback(mediaObject);
       },
       (err) => {
         console.error(err);
@@ -50,7 +48,7 @@ export function getMediaItem(callback, mediaId = 0, size = 'full'){
     .catch( (err) => {
       console.error(err);
     });
-
+  return mediaObject;
 }; // End of getMediaItem
 
 /**
