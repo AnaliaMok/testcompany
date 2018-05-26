@@ -46,13 +46,13 @@ class BlogPostCard extends Component {
     let postLink = this.getSlug(post.link);
     return (
       <React.Fragment>
-        <div className="post" key={post.title.rendered}>
-          <div className="post__img-container">
+        <div className="post-card" key={post.title.rendered}>
+          <div className="post-card__img-container">
             {featuredMedia === null ? <img src="http://via.placeholder.com/300x200" alt={post.title.rendered}/>:
             <img src={featuredMedia.source_url} alt={featuredMedia.alt === "" ? post.title.rendered : featuredMedia.alt}/>
             }
           </div>
-          <div className="post__content">
+          <div className="post-card__content">
             <h2>{post.title.rendered}</h2>
             <p dangerouslySetInnerHTML={{__html: shortenedExcerpt}}></p>
             <Link
@@ -60,12 +60,12 @@ class BlogPostCard extends Component {
             href={`/post?slug=${postLink}&apiRoute=post`}
             key={post.ID}
           >
-            <a className="post__link">Read More</a>
+            <a className="post-card__link">Read More</a>
           </Link>
           </div>
         </div>
         {/* Absolutely hate this but have no choice */}
-        <style>{blogPostStyle}</style>
+        <style jsx>{blogPostStyle}</style>
       </React.Fragment>
     )
   }

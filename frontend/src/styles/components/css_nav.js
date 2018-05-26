@@ -9,6 +9,8 @@ export const navStyles = css`
     align-items: center;
     padding: 0 3.8rem;
     max-width: 100vw;
+    background-color: #FCFCFC;
+    box-shadow: 0 6px 10px rgba(26, 41, 48,0.25);
   }
   .nav__logo{
     max-height: 2rem;
