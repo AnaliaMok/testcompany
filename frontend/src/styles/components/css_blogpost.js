@@ -18,7 +18,7 @@ export const blogPostStyle = css`
 .post-card__link{
   display: inline-block;
   margin-top: 1rem;
-  color: #F7CE3E;
+  color: #1A2930;
   font-weight: 600;
 }  
 `;
